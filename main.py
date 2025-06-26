@@ -1,7 +1,6 @@
 from environs import env
-import sqlite3
 from telebot import TeleBot
-from first_message import setup_handlers
+from authorization import setup_handlers
 
 
 env.read_env()
@@ -18,4 +17,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
