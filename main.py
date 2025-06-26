@@ -1,4 +1,5 @@
 from environs import env
+import sqlite3
 from telebot import TeleBot
 from first_message import setup_handlers
 
@@ -13,6 +14,7 @@ def main():
 
     print('Бот взлетел')
     bot.infinity_polling()
+
 
 if __name__ == '__main__':
     main()
