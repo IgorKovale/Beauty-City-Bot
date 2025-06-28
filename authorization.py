@@ -1,5 +1,6 @@
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 from database import add_user, check_user_exists
+from main_menu import show_main_menu
 
 
 temporary_storage = {}
@@ -22,8 +23,10 @@ def setup_handlers(bot):
         user_id = message.from_user.id
         phone = message.text
 
+        # Если авторизован выводим меню
         if check_user_exists(phone):
-            bot.send_message(message.chat.id, "Вы уже зарегистрированы!")
+            bot.send_message(message.chat.id, 'Мы Вас помнили 😉')
+            show_main_menu(bot, message.chat.id)
             return
 
         temporary_storage[user_id]['phone'] = phone
@@ -59,3 +62,5 @@ def setup_handlers(bot):
             message_id=call.message.message_id,
             reply_markup=None
         )
+        # Авторизовался, вывод в меню
+        show_main_menu(bot, call.message.chat.id)
