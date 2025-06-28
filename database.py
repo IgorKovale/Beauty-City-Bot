@@ -35,3 +35,29 @@ def add_user(name, phone):
     ''', (name, clean_phone))
     conn.commit()
     conn.close()
+
+def add_sign_up(user_id, salon_id, service_id, price, datetime):
+    conn = sqlite3.connect('test.db')
+    cursor = conn.cursor()
+    cursor.execute('''
+        INSERT INTO sign_up (user, salon , service, price, datetime)
+        VALUES (?, ?, ?, ?)
+        ''', (user_id, salon_id, service_id, price, datetime))
+    conn.commit()
+    conn.close()
+
+def get_salons():
+    conn = sqlite3.connect('test.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM salons")
+    salons = cursor.fetchall()
+    conn.close()
+    return salons
+
+def get_services():
+    conn = sqlite3.connect('test.db')
+    cursor = conn.cursor()
+    cursor.execute(f"SELECT * FROM services")
+    services = cursor.fetchall()
+    conn.close()
+    return services
